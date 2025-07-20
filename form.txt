@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form</title>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 8px;
+       
+    }
+    #dataTable{
+        display: none;
+    }
+    .female{
+        background-color: pink;
+    }
+    .male{
+        background-color: lightblue;
+    }
+</style>
+</head>
+<body>
+
+<form id="myForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+    <label for="Email">Email</label>
+    <input type="Email" name="Email" id="Email"><br><br>
+    <label for="age">Age:</label>
+    <input type="text" id="age" name="age"><br><br>
+   
+    <label for="gender">Gender</label><br>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">Female</label>
+     <input type="radio" id="male" name="gender" value="male">
+    <label for="male">Male</label><br><br>
+     <button type="submit">Submit</button>
+</form>
+
+<div id="tableContainer">
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Mail Id</th>
+                <th>Age</th>
+                <th>Gender</th>
+                
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+document.getElementById("myForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form submission
+    
+    // Retrieve input values
+    const name = document.getElementById("name").value;
+    const age = document.getElementById("age").value;
+    const gender = document.querySelector('input[name="gender"]:checked').value;
+
+    let colorClass="";
+    if(gender==="male"){
+        colorClass="male";
+    }else if(gender==="female"){
+        colorClass="female";
+    }
+    
+    
+    const rowHtml = `
+        
+            <tr class="${colorClass}">
+                <td>${name}</td>
+                <td>${Email}</td>
+                <td>${age}</td>
+                <td>${gender}</td>
+                
+            </tr>
+        
+    `;
+    
+    
+    const tableBody = document.getElementById("tableBody")
+    tableBody.innerHTML += rowHtml;
+
+    document.getElementById("dataTable").style.display="table"
+});
+</script>
+
+</body>
+</html>
